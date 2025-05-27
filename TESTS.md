@@ -200,3 +200,69 @@ RESOLUÇÃO:
 1. **DIAGNÓSTICO:** Executar diagnóstico do sistema de injeção eletrônica
 2. **VERIFICAR:** Sensor de oxigênio com scanner automotivo
 3. **TESTAR:** Mistura ar-combustível em diferentes rotações
+
+## Caso de Teste 4: Ruídos no Motor ao Acelerar
+
+### Sintomas Coletados:
+
+- Ruído metálico ao acelerar → **sintoma_presente(barulho_incomum_motor)**
+- Rotação sobe mas perda de potência → **sintoma_presente(perda_potencia)**
+- Check Engine não acende → **ausência de sintoma**
+- Sensor de vibração anormal → **inferência adicional**
+
+### Regras Disparadas:
+
+1. **Análise de Sintomas:**
+    
+    ```prolog
+    causa(barulho_incomum_motor, nivel_oleo_baixo, alta).
+    causa(barulho_incomum_motor, bomba_agua_defeituosa, media).
+    causa(barulho_incomum_motor, tensor_correia_frouxo, media).
+    causa(barulho_incomum_motor, rolamento_defeituoso, baixa).
+    
+    ```
+    
+2. **Análise de Perda de Potência:**
+    
+    ```prolog
+    causa(perda_potencia, sistema_injecao_falho, ?).
+    % (Sintoma definido mas sem causas específicas no código atual)
+    
+    ```
+    
+
+### Limitação do Sistema Atual:
+
+O código fornecido **não inclui regras específicas** para:
+
+- Problemas de transmissão
+- Junta de cabeçote
+- Bielas danificadas
+
+### Diagnóstico com Recursos Disponíveis:
+
+**nivel_oleo_baixo** (baseado em barulho_incomum_motor)
+
+### Recomendação de Expansão:
+
+Para este caso, seria necessário adicionar ao sistema:
+
+```prolog
+% Regras adicionais necessárias
+causa(barulho_incomum_motor, biela_danificada, alta).
+causa(barulho_incomum_motor, junta_cabecote_defeituosa, media).
+causa(perda_potencia, problema_transmissao, alta).
+causa(perda_potencia, biela_danificada, media).
+
+% Componentes adicionais
+componente_relacionado(biela_danificada, motor_interno).
+componente_relacionado(problema_transmissao, sistema_transmissao).
+
+```
+
+### Diagnóstico Melhorado (com expansões):
+
+**PROBLEMA CRÍTICO: biela_danificada**
+
+- Justificativa: Ruído metálico + perda de potência são sinais clássicos
+- Ação: Inspeção interna do motor necessária
