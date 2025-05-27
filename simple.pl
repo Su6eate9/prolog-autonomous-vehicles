@@ -270,3 +270,124 @@ diagnosticos_alternativos(ListaDiagnosticos) :-
             ListaTodos),
     sort(4, @>=, ListaTodos, ListaOrdenada), % Ordena por pontuação decrescente
     ListaDiagnosticos = ListaOrdenada.
+
+% EXERCÍCIO 4: AÇÕES CORRETIVAS AVANÇADAS
+% Sistema Expandido de Ações Corretivas
+% Ações Primárias (Alta Prioridade)
+acao_corretiva_primaria(bateria_fraca, 'Testar tensão da bateria com multímetro').
+acao_corretiva_primaria(alternador_defeituoso, 'Verificar saída do alternador (13.5-14.4V em funcionamento)').
+acao_corretiva_primaria(nivel_oleo_baixo, 'Verificar nível de óleo na vareta e completar se necessário').
+acao_corretiva_primaria(superaquecimento, 'Verificar nível do líquido de arrefecimento e temperatura do radiador').
+acao_corretiva_primaria(vela_ignicao_defeituosa, 'Inspecionar eletrodos das velas de ignição').
+
+% Ações Secundárias (Se primária não resolver)
+acao_corretiva_secundaria(bateria_fraca, 'Substituir bateria se teste indicar falha').
+acao_corretiva_secundaria(alternador_defeituoso, 'Substituir alternador se teste confirmar defeito').
+acao_corretiva_secundaria(nivel_oleo_baixo, 'Investigar possível vazamento no motor').
+acao_corretiva_secundaria(superaquecimento, 'Verificar funcionamento da bomba d\'água e termostato').
+acao_corretiva_secundaria(vela_ignicao_defeituosa, 'Substituir conjunto de velas de ignição').
+
+% Ações Preventivas
+acao_preventiva(bateria_fraca, 'Limpar terminais da bateria e aplicar vaselina').
+acao_preventiva(alternador_defeituoso, 'Verificar tensão da correia do alternador').
+acao_preventiva(nivel_oleo_baixo, 'Estabelecer rotina de verificação quinzenal do óleo').
+acao_preventiva(superaquecimento, 'Limpar radiador e verificar líquido a cada 6 meses').
+
+% Custo Estimado das Ações (em unidades monetárias)
+custo_acao(bateria_fraca, verificacao, 0).
+custo_acao(bateria_fraca, substituicao, 200).
+custo_acao(alternador_defeituoso, verificacao, 50).
+custo_acao(alternador_defeituoso, substituicao, 400).
+custo_acao(vela_ignicao_defeituosa, verificacao, 30).
+custo_acao(vela_ignicao_defeituosa, substituicao, 120).
+
+% Tempo Estimado (em minutos)
+tempo_acao(bateria_fraca, verificacao, 15).
+tempo_acao(bateria_fraca, substituicao, 30).
+tempo_acao(alternador_defeituoso, verificacao, 45).
+tempo_acao(alternador_defeituoso, substituicao, 120).
+tempo_acao(vela_ignicao_defeituosa, verificacao, 20).
+tempo_acao(vela_ignicao_defeituosa, substituicao, 60).
+
+% Sistema de Recomendação Inteligente
+recomendar_acao_completa(Problema) :-
+    format('=== RECOMENDAÇÃO PARA: ~w ===~n', [Problema]),
+    
+    % Ação Primária
+    (acao_corretiva_primaria(Problema, AcaoPrimaria) ->
+        format('1. AÇÃO PRIMÁRIA: ~w~n', [AcaoPrimaria]) ;
+        write('1. Nenhuma ação primária definida.~n')),
+    
+    % Ação Secundária
+    (acao_corretiva_secundaria(Problema, AcaoSecundaria) ->
+        format('2. SE NECESSÁRIO: ~w~n', [AcaoSecundaria]) ;
+        write('2. Nenhuma ação secundária definida.~n')),
+    
+    % Ação Preventiva
+    (acao_preventiva(Problema, AcaoPreventiva) ->
+        format('3. PREVENÇÃO: ~w~n', [AcaoPreventiva]) ;
+        write('3. Nenhuma ação preventiva definida.~n')),
+    
+    % Informações de Custo e Tempo
+    mostrar_custos_tempo(Problema),
+    nl.
+
+% Mostra custos e tempos estimados
+mostrar_custos_tempo(Problema) :-
+    write('ESTIMATIVAS:~n'),
+    (custo_acao(Problema, verificacao, CustoVerif) ->
+        format('- Custo verificação: ~w unidades~n', [CustoVerif]) ; true),
+    (custo_acao(Problema, substituicao, CustoSubst) ->
+        format('- Custo substituição: ~w unidades~n', [CustoSubst]) ; true),
+    (tempo_acao(Problema, verificacao, TempoVerif) ->
+        format('- Tempo verificação: ~w minutos~n', [TempoVerif]) ; true),
+    (tempo_acao(Problema, substituicao, TempoSubst) ->
+        format('- Tempo substituição: ~w minutos~n', [TempoSubst]) ; true).
+
+% Lógica de Decisão para Múltiplos Problemas
+plano_manutencao_completo :-
+    write('=== PLANO DE MANUTENÇÃO COMPLETO ===~n~n'),
+    diagnosticos_alternativos(ListaDiagnosticos),
+    executar_plano_por_prioridade(ListaDiagnosticos, 1).
+
+% Executa o plano ordenado por prioridade
+executar_plano_por_prioridade([], _).
+executar_plano_por_prioridade([diagnostico_info(Problema, Prob, Comp, Pont)|Resto], Num) :-
+    format('~w. PRIORIDADE ~w (Pontuação: ~w)~n', [Num, Prob, Pont]),
+    recomendar_acao_completa(Problema),
+    Num1 is Num + 1,
+    executar_plano_por_prioridade(Resto, Num1).
+
+% CONSULTAS ESPECÍFICAS ÚTEIS ATUALIZADAS
+% Consultar problema específico
+consultar_problema(Problema) :-
+    causa(Sintoma, Problema, Probabilidade),
+    format('Sintoma: ~w pode causar ~w (Probabilidade: ~w)~n', 
+           [Sintoma, Problema, Probabilidade]),
+    fail.
+consultar_problema(_).
+
+% Consultar componente específico
+consultar_componente(Componente) :-
+    componente_relacionado(Problema, Componente),
+    diagnostico(Problema, Probabilidade, Componente),
+    format('Componente ~w pode ter problema: ~w (Probabilidade: ~w)~n',
+           [Componente, Problema, Probabilidade]),
+    fail.
+consultar_componente(_).
+
+% Listar todos os sintomas possíveis
+listar_sintomas :-
+    sintoma(S),
+    write('- '), write(S), nl,
+    fail.
+listar_sintomas.
+
+% Simular cenário de teste
+simular_cenario_conflito :-
+    write('=== SIMULAÇÃO DE CENÁRIOS DE CONFLITO ===~n~n'),
+    analisar_conflito(1),
+    nl,
+    analisar_conflito(2),
+    nl,
+    analisar_conflito(3).
