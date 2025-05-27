@@ -266,3 +266,29 @@ componente_relacionado(problema_transmissao, sistema_transmissao).
 
 - Justificativa: Ruído metálico + perda de potência são sinais clássicos
 - Ação: Inspeção interna do motor necessária
+
+## Análise Geral dos Casos de Teste
+
+### Pontos Fortes do Sistema:
+
+1. **Integração sensor-sintoma** funciona bem (Casos 1 e 2)
+2. **Sistema de pontuação** resolve conflitos efetivamente
+3. **Explicabilidade** fornece justificativas claras
+4. **Ações corretivas** são práticas e hierarquizadas
+
+### Limitações Identificadas:
+
+1. **Base de conhecimento limitada** para problemas mecânicos complexos (Caso 4)
+2. **Falta de regras** para correlações específicas (transmissão, motor interno)
+3. **Sintomas não mapeados** completamente (perda_potencia tem poucas causas)
+
+### Recomendações de Melhoria:
+
+1. **Expandir base de conhecimento** com mais causas mecânicas
+2. **Adicionar sensores** de vibração, pressão, etc.
+3. **Implementar aprendizado** baseado em histórico de casos
+4. **Melhorar correlações** entre múltiplos sintomas simultâneos
+
+### Conclusão:
+
+O sistema demonstra excelente capacidade para diagnósticos elétricos e básicos, com forte sistema de explicabilidade. Para casos mecânicos complexos, necessita expansão da base de conhecimento.
