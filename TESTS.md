@@ -141,3 +141,62 @@ criando um ciclo de problemas que requer atenção imediata.
 2. **VERIFICAR:** Nível de óleo e completar se necessário
 3. **INVESTIGAR:** Possível vazamento no motor
 4. **VERIFICAR:** Nível do líquido de arrefecimento e funcionamento do radiador
+
+## Caso de Teste 3: Motor Engasgado em Altas Rotações
+
+### Sintomas Coletados:
+
+- Barulhos intermitentes acima de 3000 RPM → **sintoma_presente(barulho_incomum_motor)**
+- Luz de "Check Engine" piscando → **sintoma_presente(check_engine_acesa)**
+- Sensor de oxigênio fora da faixa → **sintoma inferido**
+
+### Regras Disparadas:
+
+1. **Análise de Sintomas:**
+    
+    ```prolog
+    % Barulho incomum
+    causa(barulho_incomum_motor, nivel_oleo_baixo, alta).
+    causa(barulho_incomum_motor, bomba_agua_defeituosa, media).
+    
+    % Check Engine
+    causa(check_engine_acesa, sensor_oxigenio_defeituoso, alta).
+    causa(check_engine_acesa, sistema_injecao_falho, alta).
+    
+    ```
+    
+2. **Diagnósticos Competindo:**
+    - **sensor_oxigenio_defeituoso**: 1 sintoma × peso 3 = 3 pontos
+    - **sistema_injecao_falho**: 1 sintoma × peso 3 = 3 pontos
+    - **nivel_oleo_baixo**: 1 sintoma × peso 3 = 3 pontos
+
+### Resolução de Conflito:
+
+O sistema detecta **CENÁRIO DE CONFLITO** e aplica análise adicional:
+
+```prolog
+cenario_conflito(3, [check_engine_acesa, perda_potencia], 'Conflito sistema injeção').
+
+```
+
+### Diagnóstico Final:
+
+**sensor_oxigenio_defeituoso** (priorizado por especificidade do sintoma)
+
+### Justificativa:
+
+```
+ANÁLISE DE CONFLITO: Conflito sistema injeção
+
+RESOLUÇÃO:
+- Check Engine intermitente em alta rotação é indicativo específico
+- Sensor de oxigênio defeituoso afeta principalmente altas rotações
+- Sistema de injeção seria mais consistente em todas as rotações
+
+```
+
+### Ações Corretivas:
+
+1. **DIAGNÓSTICO:** Executar diagnóstico do sistema de injeção eletrônica
+2. **VERIFICAR:** Sensor de oxigênio com scanner automotivo
+3. **TESTAR:** Mistura ar-combustível em diferentes rotações
