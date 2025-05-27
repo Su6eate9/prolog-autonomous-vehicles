@@ -72,3 +72,72 @@ CÁLCULO DA PONTUAÇÃO:
 2. **SE NECESSÁRIO:** Substituir bateria se teste indicar falha
 3. **PREVENÇÃO:** Limpar terminais da bateria e aplicar vaselina
 4. **ESTIMATIVAS:** Custo verificação: 0 unidades, Substituição: 200 unidades
+
+## Caso de Teste 2: Superaquecimento no Motor
+
+### Sintomas Coletados:
+
+- Temperatura do motor alcançando 105°C → **leitura_sensor(temperatura_motor, 105)**
+- Luz de "Check Engine" acesa → **sintoma_presente(check_engine_acesa)**
+- Nível de óleo próximo ao mínimo → **leitura_sensor(nivel_oleo, 15)** (abaixo de 20)
+
+### Regras Disparadas:
+
+1. **Análise de Sensores Críticos:**
+    
+    ```prolog
+    % Temperatura alta
+    sensor_critico(temperatura_motor, 105, superaquecimento) :-
+        leitura_sensor(temperatura_motor, 105),
+        limite_critico(temperatura_motor, maximo, 100),
+        105 > 100,
+        problema_sensor_alto(temperatura_motor, superaquecimento).
+    
+    % Nível de óleo baixo
+    sensor_critico(nivel_oleo, 15, nivel_oleo_baixo) :-
+        leitura_sensor(nivel_oleo, 15),
+        limite_critico(nivel_oleo, minimo, 20),
+        15 < 20,
+        problema_sensor_baixo(nivel_oleo, nivel_oleo_baixo).
+    
+    ```
+    
+2. **Diagnóstico por Sintomas:**
+    
+    ```prolog
+    causa(check_engine_acesa, sensor_oxigenio_defeituoso, alta).
+    causa(check_engine_acesa, sistema_injecao_falho, alta).
+    
+    ```
+    
+
+### Diagnósticos Identificados:
+
+1. **superaquecimento** - Evidência direta do sensor
+2. **nivel_oleo_baixo** - Evidência direta do sensor
+3. **sensor_oxigenio_defeituoso** - Por sintoma check_engine
+
+### Diagnóstico Final Priorizado:
+
+**MÚLTIPLOS PROBLEMAS CRÍTICOS DETECTADOS**
+
+### Justificativa do Sistema:
+
+```
+DIAGNÓSTICO COMBINADO:
+- Superaquecimento confirmado (105°C > 100°C)
+- Nível de óleo crítico (15% < 20%)
+- Check Engine indica problema adicional no sistema
+
+CORRELAÇÃO:
+O nível baixo de óleo pode estar CAUSANDO o superaquecimento,
+criando um ciclo de problemas que requer atenção imediata.
+
+```
+
+### Ações Corretivas Urgentes:
+
+1. **IMEDIATO:** Parar o veículo e desligar o motor
+2. **VERIFICAR:** Nível de óleo e completar se necessário
+3. **INVESTIGAR:** Possível vazamento no motor
+4. **VERIFICAR:** Nível do líquido de arrefecimento e funcionamento do radiador
