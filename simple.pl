@@ -182,7 +182,6 @@ mostrar_acoes_corretivas :-
     acao_corretiva(Problema, Acao),
     format('- ~w: ~w~n', [Problema, Acao]),
     fail.
-mostrar_acoes_corretivas.
 
 mostrar_acoes_corretivas :-
     diagnostico(Problema, media, _),
@@ -195,3 +194,5 @@ mostrar_acoes_corretivas :-
     acao_corretiva(Problema, Acao),
     format('- ~w: ~w~n', [Problema, Acao]),
     fail.
+
+mostrar_acoes_corretivas.
