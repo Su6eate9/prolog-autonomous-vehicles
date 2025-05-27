@@ -73,3 +73,37 @@ O sistema considera um cenário de **conflito entre múltiplas causas possíveis
 2. Verificar o sistema de injeção eletrônica.
 3. Avaliar a mistura ar-combustível e funcionamento em diferentes regimes de rotação.
 4. Se necessário, substituir o sensor defeituoso.
+
+
+## Caso de Teste 4 — Ruídos no Motor ao Acelerar
+
+### Regras Ativadas:
+
+* O **barulho metálico ao acelerar** está associado a possíveis problemas como **nível de óleo baixo**, **tensor da correia frouxo**, **bomba d'água defeituosa** ou **rolamento defeituoso**.
+* A **perda de potência** não possui uma regra clara no código atual, o que limita o diagnóstico automático.
+* O **sensor de vibração** indicando valores anormais reforça a suspeita de problema mecânico grave.
+
+### Justificativa do Diagnóstico:
+
+O sistema tenta associar os sintomas a problemas conhecidos, mas encontra limitações na base de conhecimento atual, que não possui regras para defeitos como:
+
+* **Biela danificada**
+* **Junta de cabeçote**
+* **Problemas na transmissão**
+
+Com os recursos atuais, o sistema retorna uma possível suspeita de **nível de óleo baixo** como causa do barulho, mas **não consegue justificar diretamente a perda de potência**.
+
+Idealmente, o diagnóstico deveria sugerir:
+
+* Se o ruído vem da parte do motor, a causa pode ser **biela danificada ou junta de cabeçote defeituosa**.
+* Se o ruído vem da transmissão, pode ser um problema no **sistema de tração ou na caixa de câmbio**.
+
+### Ações Corretivas:
+
+1. Realizar inspeção física detalhada no motor.
+2. Verificar nível de óleo e procurar por indícios de desgaste interno (limalhas metálicas no óleo).
+3. Avaliar componentes como **biela, pistões, junta de cabeçote** e também transmissão.
+4. Se confirmado problema interno do motor, realizar desmontagem para manutenção pesada.
+5. Testar o sistema de transmissão se houver indício de que o ruído vem dessa região.
+
+
