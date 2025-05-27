@@ -27,3 +27,27 @@ A presença da luz da bateria piscando levanta uma segunda suspeita de **alterna
 2. Se estiver com problema, substituir a bateria.
 3. Se o problema persistir, realizar diagnóstico no alternador.
 4. Fazer manutenção preventiva nos terminais da bateria (limpeza e proteção).
+
+## Caso de Teste 2 — Superaquecimento no Motor
+
+### Regras Ativadas:
+
+* O sistema detecta que a **temperatura do motor (105°C) está acima do limite de 100°C**, indicando **superaquecimento**.
+* Detecta também que o **nível de óleo (15) está abaixo do mínimo (20)**, apontando **nível de óleo baixo**.
+* A luz de **Check Engine acesa** sugere problemas adicionais como **sensor de oxigênio defeituoso** ou **falha no sistema de injeção**.
+
+### Justificativa do Diagnóstico:
+
+O sistema identifica **múltiplos problemas críticos**:
+
+* O **superaquecimento** tem relação direta com a temperatura alta.
+* O **nível de óleo baixo** pode ser uma das causas do superaquecimento, além de indicar falta de manutenção ou vazamento.
+* A luz de **Check Engine** pode estar acendendo como efeito colateral de problemas no motor ou no sistema de emissão.
+
+### Ações Corretivas:
+
+1. Desligar o veículo imediatamente para evitar danos maiores.
+2. Verificar e completar o nível de óleo.
+3. Inspecionar possíveis vazamentos ou falha no sistema de lubrificação.
+4. Verificar também o sistema de arrefecimento (líquido, radiador, bomba d'água).
+5. Realizar diagnóstico no motor e nos sensores associados.
