@@ -196,3 +196,77 @@ mostrar_acoes_corretivas :-
     fail.
 
 mostrar_acoes_corretivas.
+
+% EXERCÍCIO 3: REGRAS DE DECISÃO E PRIORIZAÇÃO
+% Sistema de Pesos para Priorização
+peso_probabilidade(alta, 3).
+peso_probabilidade(media, 2).
+peso_probabilidade(baixa, 1).
+
+% Cenários de Conflito - Múltiplos sintomas apontando para diferentes causas
+cenario_conflito(1, [falha_ignicao, luz_bateria_acesa], 'Conflito elétrico').
+cenario_conflito(2, [superaquecimento, barulho_incomum_motor], 'Conflito mecânico').
+cenario_conflito(3, [check_engine_acesa, perda_potencia], 'Conflito sistema injeção').
+
+% Regra de Priorização com Corte para Evitar Backtracking Desnecessário
+diagnostico_prioritario(Problema, Probabilidade, Componente, Pontuacao) :-
+    diagnostico(Problema, Probabilidade, Componente),
+    peso_probabilidade(Probabilidade, Peso),
+    contar_sintomas_relacionados(Problema, ContadorSintomas),
+    Pontuacao is Peso * ContadorSintomas,
+    !. % Corte para evitar backtracking após encontrar solução
+
+% Conta quantos sintomas estão relacionados a um problema específico
+contar_sintomas_relacionados(Problema, Contador) :-
+    findall(Sintoma, (causa(Sintoma, Problema, _), sintoma_presente(Sintoma)), Lista),
+    length(Lista, Contador).
+
+% Encontrar o diagnóstico com maior pontuação (mais provável)
+melhor_diagnostico(MelhorProblema, MelhorProbabilidade, MelhorComponente, MaiorPontuacao) :-
+    findall(pontuacao(Problema, Probabilidade, Componente, Pontuacao),
+            diagnostico_prioritario(Problema, Probabilidade, Componente, Pontuacao),
+            ListaPontuacoes),
+    encontrar_maior_pontuacao(ListaPontuacoes, MelhorProblema, MelhorProbabilidade, MelhorComponente, MaiorPontuacao).
+
+% Encontra a maior pontuação na lista
+encontrar_maior_pontuacao([pontuacao(P, Prob, C, Pont)], P, Prob, C, Pont) :- !.
+encontrar_maior_pontuacao([pontuacao(P1, Prob1, C1, Pont1)|Resto], MelhorP, MelhorProb, MelhorC, MaiorPont) :-
+    encontrar_maior_pontuacao(Resto, P2, Prob2, C2, Pont2),
+    (Pont1 > Pont2 -> 
+        (MelhorP = P1, MelhorProb = Prob1, MelhorC = C1, MaiorPont = Pont1) ;
+        (MelhorP = P2, MelhorProb = Prob2, MelhorC = C2, MaiorPont = Pont2)).
+
+% Análise de Conflitos entre Sintomas
+analisar_conflito(NumCenario) :-
+    cenario_conflito(NumCenario, Sintomas, Descricao),
+    format('=== ANÁLISE DE CONFLITO: ~w ===~n', [Descricao]),
+    format('Sintomas presentes: ~w~n~n', [Sintomas]),
+    analisar_sintomas_conflito(Sintomas),
+    nl,
+    write('RESOLUÇÃO POR PRIORIZAÇÃO:'), nl,
+    melhor_diagnostico(MelhorProblema, MelhorProb, MelhorComp, MaiorPont),
+    format('Diagnóstico mais provável: ~w (~w) - Componente: ~w - Pontuação: ~w~n',
+           [MelhorProblema, MelhorProb, MelhorComp, MaiorPont]).
+
+% Analisa cada sintoma no conflito
+analisar_sintomas_conflito([]).
+analisar_sintomas_conflito([Sintoma|Resto]) :-
+    format('Sintoma: ~w~n', [Sintoma]),
+    findall(causa_info(Problema, Prob), causa(Sintoma, Problema, Prob), Causas),
+    mostrar_causas(Causas),
+    nl,
+    analisar_sintomas_conflito(Resto).
+
+% Mostra as causas de um sintoma
+mostrar_causas([]).
+mostrar_causas([causa_info(Problema, Prob)|Resto]) :-
+    format('  -> ~w (probabilidade: ~w)~n', [Problema, Prob]),
+    mostrar_causas(Resto).
+
+% Sistema com Backtracking Controlado para Múltiplas Soluções
+diagnosticos_alternativos(ListaDiagnosticos) :-
+    findall(diagnostico_info(Problema, Probabilidade, Componente, Pontuacao),
+            diagnostico_prioritario(Problema, Probabilidade, Componente, Pontuacao),
+            ListaTodos),
+    sort(4, @>=, ListaTodos, ListaOrdenada), % Ordena por pontuação decrescente
+    ListaDiagnosticos = ListaOrdenada.
