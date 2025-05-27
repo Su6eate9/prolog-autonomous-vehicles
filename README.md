@@ -50,3 +50,26 @@ O sistema identifica **múltiplos problemas críticos**:
 4. Verificar também o sistema de arrefecimento (líquido, radiador, bomba d'água).
 5. Realizar diagnóstico no motor e nos sensores associados.
 
+
+
+## Caso de Teste 3 — Motor Engasgado em Altas Rotações
+
+### Regras Ativadas:
+
+* O sintoma de **barulho em altas rotações** pode estar relacionado a **nível de óleo baixo** ou **bomba d'água defeituosa**.
+* A luz de **Check Engine piscando em alta rotação** tem relação direta com **sensor de oxigênio defeituoso** ou **falha no sistema de injeção**.
+* O sistema também infere que o **sensor de oxigênio está fora da faixa**, reforçando essa suspeita.
+
+### Justificativa do Diagnóstico:
+
+O sistema considera um cenário de **conflito entre múltiplas causas possíveis**, mas prioriza:
+
+* **Sensor de oxigênio defeituoso**, pois é o mais diretamente ligado ao sintoma da luz de **Check Engine piscando em altas rotações**, especialmente porque o problema ocorre só em altas rotações (característico de falha no sensor de O2).
+* O sistema de injeção também é considerado, mas fica em segundo plano, pois uma falha na injeção normalmente geraria sintomas em todas as faixas de rotação.
+
+### Ações Corretivas:
+
+1. Fazer diagnóstico no **sensor de oxigênio** (via scanner automotivo).
+2. Verificar o sistema de injeção eletrônica.
+3. Avaliar a mistura ar-combustível e funcionamento em diferentes regimes de rotação.
+4. Se necessário, substituir o sensor defeituoso.
