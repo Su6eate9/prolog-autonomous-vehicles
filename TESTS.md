@@ -292,3 +292,23 @@ componente_relacionado(problema_transmissao, sistema_transmissao).
 ### Conclusão:
 
 O sistema demonstra excelente capacidade para diagnósticos elétricos e básicos, com forte sistema de explicabilidade. Para casos mecânicos complexos, necessita expansão da base de conhecimento.
+
+### ✅ **Pontos Fortes:**
+
+- **Integração sensores-sintomas**: O sistema correlaciona bem leituras numéricas com regras lógicas
+- **Sistema de pontuação**: Resolve conflitos entre múltiplos diagnósticos de forma eficaz
+- **Explicabilidade robusta**: Fornece justificativas detalhadas para cada decisão
+- **Ações corretivas estruturadas**: Organizadas em primárias, secundárias e preventivas
+
+### ⚠️ **Limitações Identificadas:**
+
+- **Base limitada para problemas mecânicos complexos** (Caso 4 - bielas, transmissão)
+- **Alguns sintomas não completamente mapeados** (perda_potencia tem poucas causas)
+- **Necessita expansão** para cobrir mais cenários automotivos reais
+
+## **Como o Sistema Processa Cada Caso:**
+
+1. **Caso 1** (Partida Inconsistente): Sistema identifica corretamente `bateria_fraca` através de sensor + sintomas
+2. **Caso 2** (Superaquecimento): Detecta múltiplos problemas críticos correlacionados
+3. **Caso 3** (Motor Engasgado): Resolve conflito priorizando `sensor_oxigenio_defeituoso`
+4. **Caso 4** (Ruídos Metálicos): Limitado pela base de conhecimento atual
