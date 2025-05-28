@@ -125,6 +125,3 @@ Este conjunto de exercícios visou familiarizar os alunos com os princípios de 
 
 5. **Explicabilidade do sistema:**  
    Foram criadas funcionalidades que explicam, em linguagem técnica e natural, como o sistema chegou a determinado diagnóstico. Além disso, há explicações sobre por que certas hipóteses foram descartadas, bem como um relatório de confiança e uma trilha de auditoria passo a passo, promovendo transparência e rastreabilidade.
-
-
-Ao final, espera-se que os alunos desenvolvam (por conta própria) um **protótipo em Prolog**, organizando as regras e fatos de forma que cubra os cenários de teste e seja capaz de explicar o raciocínio por trás de cada diagnóstico. Este trabalho atendeu completamente a esse objetivo.
