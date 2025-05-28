@@ -1,3 +1,10 @@
+**Alunos:**
+**Antonio Claudino Silva Neto**
+**Gabryel Guimaraes Coelho Gomes**
+**Maria Luiza Monteiro**
+**Nickolas Ferreira Maiolino**
+
+
 # VEICULOS AUTÔNOMOS
 Imagine que você trabalha em uma equipe de desenvolvimento de software para veículos autônomos. Um dos módulos desse sistema precisa diagnosticar problemas mecânicos e elétricos no veículo com base em leituras de sensores e estados internos.
 
