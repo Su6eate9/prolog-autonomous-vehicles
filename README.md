@@ -1,10 +1,3 @@
-**Alunos:**  
-**Antonio Claudino Silva Neto**  
-**Gabryel Guimaraes Coelho Gomes**  
-**Maria Luiza Monteiro**  
-**Nickolas Ferreira Maiolino**  
-
-
 # VEICULOS AUTÔNOMOS
 Imagine que você trabalha em uma equipe de desenvolvimento de software para veículos autônomos. Um dos módulos desse sistema precisa diagnosticar problemas mecânicos e elétricos no veículo com base em leituras de sensores e estados internos.
 
@@ -132,3 +125,9 @@ Este conjunto de exercícios visou familiarizar os alunos com os princípios de 
 
 5. **Explicabilidade do sistema:**  
    Foram criadas funcionalidades que explicam, em linguagem técnica e natural, como o sistema chegou a determinado diagnóstico. Além disso, há explicações sobre por que certas hipóteses foram descartadas, bem como um relatório de confiança e uma trilha de auditoria passo a passo, promovendo transparência e rastreabilidade.
+
+**Alunos:**  
+**Antonio Claudino Silva Neto**  
+**Gabryel Guimaraes Coelho Gomes**  
+**Maria Luiza Monteiro**  
+**Nickolas Ferreira Maiolino**  
