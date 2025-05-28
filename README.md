@@ -107,3 +107,24 @@ Idealmente, o diagnóstico deveria sugerir:
 5. Testar o sistema de transmissão se houver indício de que o ruído vem dessa região.
 
 
+## Conclusão
+
+Este conjunto de exercícios visou familiarizar os alunos com os princípios de **base de conhecimento**, **regras lógicas** e **inferência de diagnóstico**, aplicando-os no contexto de um veículo inteligente. No projeto desenvolvido em equipe, as seguintes etapas foram contempladas de forma prática:
+
+1. **Definição de sintomas e causas:**  
+   Foram definidos diversos sintomas possíveis de falhas em veículos, como falha de ignição, luzes no painel, barulho no motor, entre outros. Para cada sintoma, foram mapeadas múltiplas causas prováveis com diferentes níveis de probabilidade (alta, média e baixa), refletindo diferentes situações reais de falha automotiva.
+
+2. **Uso de leituras de sensores para inferir estados de falha:**  
+   O sistema foi projetado para ler valores simulados de sensores como temperatura do motor, tensão da bateria, nível de óleo e pressão do óleo. Esses valores são comparados com limites críticos para identificar condições anormais e inferir falhas como superaquecimento, bateria fraca, rotação instável, entre outros.
+
+3. **Tratamento de prioridades e conflitos:**  
+   Implementamos uma lógica de decisão que calcula a pontuação de cada diagnóstico com base na probabilidade da causa e na quantidade de sintomas relacionados. Quando há múltiplas causas possíveis, o sistema escolhe a mais provável utilizando regras de corte (`!`) e priorização, além de permitir simulações de conflitos entre sintomas.
+
+4. **Geração de ações corretivas:**  
+   O sistema sugere ações corretivas específicas para cada falha detectada, divididas em ações primárias, secundárias e preventivas. Também foram incluídos dados de custo e tempo estimado de manutenção, tornando a recomendação mais realista e útil em cenários aplicáveis.
+
+5. **Explicabilidade do sistema:**  
+   Foram criadas funcionalidades que explicam, em linguagem técnica e natural, como o sistema chegou a determinado diagnóstico. Além disso, há explicações sobre por que certas hipóteses foram descartadas, bem como um relatório de confiança e uma trilha de auditoria passo a passo, promovendo transparência e rastreabilidade.
+
+
+Ao final, espera-se que os alunos desenvolvam (por conta própria) um **protótipo em Prolog**, organizando as regras e fatos de forma que cubra os cenários de teste e seja capaz de explicar o raciocínio por trás de cada diagnóstico. Este trabalho atendeu completamente a esse objetivo.
