@@ -10,6 +10,7 @@ sintoma(superaquecimento).
 sintoma(perda_potencia).
 sintoma(consumo_excessivo_combustivel).
 
+
 % Possíveis Causas para cada Sintoma
 % Falha de Ignição
 causa(falha_ignicao, bateria_fraca, alta).
